@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Tabela de notas</title>
+        <meta charset="utf-8">
+        
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/bootstrap-theme.css" rel="stylesheet">
+        
+        <script src="engine.js"></script>
+
+    </head>
+    <body>
+        <div class="container">
+            <h1>Tabela de notas</h1>
+        </div>
+        
+        
+        <section>
+        	<div class="container">
+	        
+		      	<h2>Média dos alunos</h2>
+				<table class="table js-tabela">
+					<thead>
+						<tr>
+							<th>Nome</th>
+							<th>Nota 1</th>
+							<th>Nota 2</th>
+							<th>Nota 3</th>
+							<th>Nota 4</th>
+							<th>Média</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="aluno" >
+							<td><input type="text" class="aluno-nome" size="20"></td>
+							<td><input type="text" class="aluno-n1" size="5"></td>
+							<td><input type="text" class="aluno-n2" size="5"></td>
+							<td><input type="text" class="aluno-n3" size="5"></td>
+							<td><input type="text" class="aluno-n4" size="5"></td>	
+							<td><input type="text" class="aluno-m" size="5"readonly tabindex="-1"></td>
+						</tr>
+
+						<tr class="aluno" >
+							<td><input type="text" class="aluno-nome" size="20"></td>
+							<td><input type="text" class="aluno-n1" size="5"></td>
+							<td><input type="text" class="aluno-n2" size="5"></td>
+							<td><input type="text" class="aluno-n3" size="5"></td>
+							<td><input type="text" class="aluno-n4" size="5"></td>	
+							<td><input type="text" class="aluno-m" size="5"readonly tabindex="-1"></td>
+						</tr>
+
+						<tr class="aluno" >
+							<td><input type="text" class="aluno-nome" size="20"></td>
+							<td><input type="text" class="aluno-n1" size="5"></td>
+							<td><input type="text" class="aluno-n2" size="5"></td>
+							<td><input type="text" class="aluno-n3" size="5"></td>
+							<td><input type="text" class="aluno-n4" size="5"></td>	
+							<td><input type="text" class="aluno-m" size="5"readonly tabindex="-1"></td>
+						</tr>
+
+						<tr class="aluno">
+							<td><input type="text" class="aluno-nome" size="20"></td>
+							<td><input type="text" class="aluno-n1" size="5"></td>
+							<td><input type="text" class="aluno-n2" size="5"></td>
+							<td><input type="text" class="aluno-n3" size="5"></td>
+							<td><input type="text" class="aluno-n4" size="5"></td>	
+							<td><input type="text" class="aluno-m" size="5"readonly tabindex="-1"></td>
+						</tr>
+						<tr class="aluno" >
+							<td><input type="text" class="aluno-nome" size="20"></td>
+							<td><input type="text" class="aluno-n1" size="5"></td>
+							<td><input type="text" class="aluno-n2" size="5"></td>
+							<td><input type="text" class="aluno-n3" size="5"></td>
+							<td><input type="text" class="aluno-n4" size="5"></td>	
+							<td><input type="text" class="aluno-m" size="5"readonly tabindex="-1"></td>
+						</tr>
+					</tbody>
+				</table>
+	        	<button id ="go">Calcular médias</button>
+	        	<button id = "clear">Limpar tabela</button>
+            <p style="margin-top:50px;color:red">*Sendo qualquer uma das notas 0, o aluno será reprovado automaticamente</p>
+        	</div>	
+        </section>
+
+        <script>
+            
+           // (function(){
+           //     'use strict'
+                
+                var trs = document.querySelectorAll(".js-tabela tbody .aluno");
+                var $go = document.querySelector("#go");
+                var $inputs = document.querySelectorAll("input");
+                var $clear = document.querySelector("#clear");
+
+                clear($inputs);  
+                $clear.addEventListener("click",clear);
+                function clear(){
+                  for(x=0;x<$inputs.length;x++){
+                    $inputs[x].value = "";
+                  }
+                }
+
+                $go.addEventListener("click",start);
+                function start(){
+                  
+                  for(var x = 0;x<trs.length; x++){
+                  
+                      var linhaAluno = trs[x];  
+                      var tds = linhaAluno.querySelectorAll("input");
+                      var notas = recuperarNumerosDeColunas(tds);
+                      
+
+                      var temZero=notas.some(nota => nota === 0);  
+
+                      var mensagem =temZero? "Reprovado" : calcularMedia.apply(this, notas);
+                      
+                      if (isNaN(mensagem)) return;
+
+                      linhaAluno.querySelector(".aluno-m").value = mensagem;
+                      
+                      if(temZero || mensagem<7){
+                        linhaAluno.querySelector(".aluno-m").style.color="red";
+                        linhaAluno.querySelector(".aluno-m").style.fontWeight="bolder";
+                      }else{
+                        linhaAluno.querySelector(".aluno-m").style.color="blue";
+                        linhaAluno.querySelector(".aluno-m").style.fontWeight="bolder";
+                      } 
+                  }
+
+                  function recuperarNumerosDeColunas(tds){
+
+                      var arr=[];
+                      for(var x=0; x < tds.length;x++){
+                          
+                          if(!isNaN(tds[x].value) && tds[x].value !==""){
+                              arr.push(parseFloat(tds[x].value));
+                          }
+                    }
+                      return arr;
+                  };
+                };
+         //   })()
+            
+        </script>
+        
+    </body>
+</html>
