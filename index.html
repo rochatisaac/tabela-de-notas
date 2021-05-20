@@ -38,7 +38,7 @@
 							<td><input type="text" class="aluno-n2" size="5"></td>
 							<td><input type="text" class="aluno-n3" size="5"></td>
 							<td><input type="text" class="aluno-n4" size="5"></td>	
-							<td><input type="text" class="aluno-m" size="5"readonly tabindex="-1"></td>
+							<td><input type="text" class="aluno-m" size="7"readonly tabindex="-1"></td>
 						</tr>
 
 						<tr class="aluno" >
@@ -47,7 +47,7 @@
 							<td><input type="text" class="aluno-n2" size="5"></td>
 							<td><input type="text" class="aluno-n3" size="5"></td>
 							<td><input type="text" class="aluno-n4" size="5"></td>	
-							<td><input type="text" class="aluno-m" size="5"readonly tabindex="-1"></td>
+							<td><input type="text" class="aluno-m" size="7"readonly tabindex="-1"></td>
 						</tr>
 
 						<tr class="aluno" >
@@ -56,7 +56,7 @@
 							<td><input type="text" class="aluno-n2" size="5"></td>
 							<td><input type="text" class="aluno-n3" size="5"></td>
 							<td><input type="text" class="aluno-n4" size="5"></td>	
-							<td><input type="text" class="aluno-m" size="5"readonly tabindex="-1"></td>
+							<td><input type="text" class="aluno-m" size="7"readonly tabindex="-1"></td>
 						</tr>
 
 						<tr class="aluno">
@@ -65,7 +65,7 @@
 							<td><input type="text" class="aluno-n2" size="5"></td>
 							<td><input type="text" class="aluno-n3" size="5"></td>
 							<td><input type="text" class="aluno-n4" size="5"></td>	
-							<td><input type="text" class="aluno-m" size="5"readonly tabindex="-1"></td>
+							<td><input type="text" class="aluno-m" size="7"readonly tabindex="-1"></td>
 						</tr>
 						<tr class="aluno" >
 							<td><input type="text" class="aluno-nome" size="20"></td>
@@ -73,7 +73,7 @@
 							<td><input type="text" class="aluno-n2" size="5"></td>
 							<td><input type="text" class="aluno-n3" size="5"></td>
 							<td><input type="text" class="aluno-n4" size="5"></td>	
-							<td><input type="text" class="aluno-m" size="5"readonly tabindex="-1"></td>
+							<td><input type="text" class="aluno-m" size="7"readonly tabindex="-1"></td>
 						</tr>
 					</tbody>
 				</table>
@@ -85,8 +85,8 @@
 
         <script>
             
-           // (function(){
-           //     'use strict'
+            (function(){
+                'use strict'
                 
                 var trs = document.querySelectorAll(".js-tabela tbody .aluno");
                 var $go = document.querySelector("#go");
@@ -96,7 +96,7 @@
                 clear($inputs);  
                 $clear.addEventListener("click",clear);
                 function clear(){
-                  for(x=0;x<$inputs.length;x++){
+                  for(var x=0;x<$inputs.length;x++){
                     $inputs[x].value = "";
                   }
                 }
@@ -115,7 +115,7 @@
 
                       var mensagem =temZero? "Reprovado" : calcularMedia.apply(this, notas);
                       
-                      if (isNaN(mensagem)) return;
+                      if (isNaN(mensagem) && mensagem !== "Reprovado") mensagem = "";
 
                       linhaAluno.querySelector(".aluno-m").value = mensagem;
                       
@@ -140,7 +140,7 @@
                       return arr;
                   };
                 };
-         //   })()
+            })()
             
         </script>
         
